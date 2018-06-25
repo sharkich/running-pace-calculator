@@ -9,10 +9,10 @@ const FILES_TO_CACHE = [
   './runtime.js',
   './polyfills.js',
 
-  './vendor.js', // todo dev
-  './styles.js', // todo dev
+  // './vendor.js', // todo dev
+  // './styles.js', // todo dev
 
-  // './styles.css', // todo prod
+  './styles.css', // todo prod
 
   './main.js',
   './service-worker.js',
