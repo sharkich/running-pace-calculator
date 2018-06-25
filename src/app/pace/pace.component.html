@@ -1,0 +1,45 @@
+<div class="pace">
+    <h1>{{title}}</h1>
+
+    <div class="section">
+        <h2>Distance <mark>{{distance}} m</mark></h2>
+        <div class="buttons">
+            <button
+                *ngFor="let d of distances;"
+                (click)="onSelectDistance(d.distance)"
+                class="button"
+                type="button"
+                [ngClass]="{'selected': d.distance === distance}">
+                {{d.title}}
+            </button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Pace <mark>{{hhmmss(pace).substring(3)}}</mark></h2>
+        <input
+            type="range"
+            min="1"
+            max="{{maxPace}}"
+            step="1"
+            [(ngModel)]="pace"
+            (ngModelChange)="onChangePace($event)"
+            class="range">
+    </div>
+
+    <div class="section">
+        <h2>Time <mark>{{hhmmss(time)}}</mark></h2>
+        <input
+            type="range"
+            min="1"
+            max="{{maxTime}}"
+            step="1"
+            [(ngModel)]="time"
+            (ngModelChange)="onChangeTime($event)"
+            class="range">
+    </div>
+
+    <div>
+        <a href="https://fla-kyiv.org.ua/wp-content/uploads/2014/04/klasyfikatsiya_2014_legka_atletyka.pdf" target="_blank">Нормативи з легкої атлетики України (2014)</a>
+    </div>
+</div>
