@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "devchallenge2018final": {
+    "running_pace_calculator": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/devchallenge2018final",
+            "outputPath": "dist/running_pace_calculator",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -55,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "devchallenge2018final:build"
+            "browserTarget": "running_pace_calculator:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "devchallenge2018final:build:production"
+              "browserTarget": "running_pace_calculator:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "devchallenge2018final:build"
+            "browserTarget": "running_pace_calculator:build"
           }
         },
         "test": {
@@ -104,7 +104,7 @@
         }
       }
     },
-    "devchallenge2018final-e2e": {
+    "running_pace_calculator-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -112,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "devchallenge2018final:serve"
+            "devServerTarget": "running_pace_calculator:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "devchallenge2018final:serve:production"
+              "devServerTarget": "running_pace_calculator:serve:production"
             }
           }
         },
@@ -132,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "devchallenge2018final"
+  "defaultProject": "running_pace_calculator"
 }
