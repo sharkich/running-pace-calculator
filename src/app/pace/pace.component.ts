@@ -110,10 +110,6 @@ export class PaceComponent implements OnInit {
   }
 
   hhmmss(seconds) {
-    let minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    const hours = Math.floor(minutes / 60);
-    minutes = minutes % 60;
-    return this.pad(hours) + ':' + this.pad(minutes) + ':' + this.pad(seconds);
+    return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 }
