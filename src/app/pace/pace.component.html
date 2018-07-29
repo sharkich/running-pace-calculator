@@ -3,41 +3,79 @@
 <div class="pace card">
 
     <div class="section">
-        <h2>Distance <mark>{{distance}} m</mark></h2>
-        <div class="buttons">
+        <div class="left">
+          <h2>Distance <mark>{{distance}} m</mark></h2>
+          <div class="buttons">
             <button
-                *ngFor="let d of distances;"
-                (click)="onSelectDistance(d.distance)"
-                class="button"
-                type="button"
-                [ngClass]="{'selected': d.distance === distance}">
-                {{d.title}}
+              *ngFor="let d of distances;"
+              (click)="onSelectDistance(d.distance)"
+              class="button"
+              type="button"
+              [ngClass]="{'selected': d.distance === distance}">
+              {{d.title}}
             </button>
+          </div>
+        </div>
+        <div class="right">
+          <span *ngIf="isLockedDistance" class="locked">🔒 locked</span>
+          <button *ngIf="!isLockedDistance" (click)="onLockDistance()" class="lock">🔓 lock</button>
         </div>
     </div>
-
     <div class="section">
-        <h2>Pace <mark>{{hhmmss(pace).substring(3)}}</mark></h2>
+      <div class="left">
         <input
-            type="range"
-            min="1"
-            max="{{maxPace}}"
-            step="1"
-            [(ngModel)]="pace"
-            (ngModelChange)="onChangePace($event)"
-            class="range">
+          type="range"
+          min="1"
+          max="{{maxDistance}}"
+          step="1"
+          [(ngModel)]="distance"
+          (ngModelChange)="onSelectDistance($event)"
+          class="range">
+      </div>
     </div>
 
     <div class="section">
-        <h2>Time <mark>{{hhmmss(time)}}</mark></h2>
+        <div class="left">
+          <h2>Pace <mark>{{hhmmss(pace).substring(3)}}</mark></h2>
+        </div>
+        <div class="right">
+          <span *ngIf="isLockedPace" class="locked">🔒 locked</span>
+          <button *ngIf="!isLockedPace" (click)="onLockPace()" class="lock">🔓 lock</button>
+        </div>
+    </div>
+    <div class="section">
+      <div class="left">
         <input
-            type="range"
-            min="1"
-            max="{{maxTime}}"
-            step="1"
-            [(ngModel)]="time"
-            (ngModelChange)="onChangeTime($event)"
-            class="range">
+          type="range"
+          min="1"
+          max="{{maxPace}}"
+          step="1"
+          [(ngModel)]="pace"
+          (ngModelChange)="onChangePace($event)"
+          class="range">
+      </div>
+    </div>
+
+    <div class="section">
+        <div class="left">
+          <h2>Time <mark>{{hhmmss(time)}}</mark></h2>
+        </div>
+        <div class="right">
+          <span *ngIf="isLockedTime" class="locked">🔒 locked</span>
+          <button *ngIf="!isLockedTime" (click)="onLockTime()" class="lock">🔓 lock</button>
+        </div>
+    </div>
+    <div class="section">
+      <div class="left">
+        <input
+          type="range"
+          min="1"
+          max="{{maxTime}}"
+          step="1"
+          [(ngModel)]="time"
+          (ngModelChange)="onChangeTime($event)"
+          class="range">
+      </div>
     </div>
 
     <div>

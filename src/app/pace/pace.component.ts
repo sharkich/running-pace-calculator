@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 
 import {SeoService} from '../_shared/services/seo.service';
 
+const LOCKED_DATA = {
+  DISTANCE: 'DISTANCE',
+  PACE: 'PACE',
+  TIME: 'TIME'
+};
+
 @Component({
   selector: 'app-pace',
   templateUrl: 'pace.component.html',
@@ -14,8 +20,11 @@ export class PaceComponent implements OnInit {
   public time: number;
   public maxPace: number = 14 * 60;
   public maxTime: number;
+  public maxDistance: number = 100000;
 
   public title = 'Running Pace Calculator';
+
+  public lockedData = LOCKED_DATA.DISTANCE;
 
   public distances = [
     {
@@ -86,23 +95,29 @@ export class PaceComponent implements OnInit {
 
   onSelectDistance(distance: number) {
     this.distance = distance;
-    this.maxTime = distance * this.maxPace / 1000;
+    if (this.isLockedDistance) {
+      this.maxTime = distance * this.maxPace / 1000;
+    }
+
     this.onChangePace(this.pace);
+
     const dist = this.distances.find((d) => d.distance === this.distance);
     if (dist) {
       this.title = dist.pageTitle;
     }
     this.seoService.setTitle(this.title);
-    console.log(this.distance);
-    // this.router.navigate(['apps', 'pace', this.distance]);
   }
 
   onChangePace(pace: number) {
-    this.time = Math.round(this.distance * pace / 1000);
+    if (!this.isLockedTime) {
+      this.time = Math.round(this.distance * pace / 1000);
+    }
   }
 
   onChangeTime(time: number) {
-    this.pace = Math.round(1000 * time / this.distance);
+    if (!this.isLockedPace) {
+      this.pace = Math.round(1000 * time / this.distance);
+    }
   }
 
   private pad(num) {
@@ -116,4 +131,29 @@ export class PaceComponent implements OnInit {
     minutes = minutes % 60;
     return this.pad(hours) + ':' + this.pad(minutes) + ':' + this.pad(seconds);
   }
+
+  get isLockedDistance(): boolean {
+    return this.lockedData === LOCKED_DATA.DISTANCE;
+  }
+
+  get isLockedPace(): boolean {
+    return this.lockedData === LOCKED_DATA.PACE;
+  }
+
+  get isLockedTime(): boolean {
+    return this.lockedData === LOCKED_DATA.TIME;
+  }
+
+  onLockDistance() {
+    this.lockedData = LOCKED_DATA.DISTANCE;
+  }
+
+  onLockPace() {
+    this.lockedData = LOCKED_DATA.PACE;
+  }
+
+  onLockTime() {
+    this.lockedData = LOCKED_DATA.TIME;
+  }
+
 }
